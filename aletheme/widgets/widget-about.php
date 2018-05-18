@@ -1,56 +1,56 @@
 <?php
 /**
- * Blog Widget 
+ * Blog Widget
  */
-class Aletheme_About_Widget extends WP_Widget 
+class Aletheme_About_Widget extends WP_Widget
 {
 	public $image_field = 'image';
-	
+
 	/**
-	 * General Setup 
+	 * General Setup
 	 */
 	public function __construct() {
-	
+
 		/* Widget settings. */
 		$widget_ops = array(
-			'classname' => 'ale_about_widget', 
-			'description' => __('A widget that displays a short information about you.', 'aletheme') 
+			'classname' => 'ale_about_widget',
+			'description' => __('A widget that displays a short information about you.', 'aletheme')
 		);
 
 		/* Widget control settings. */
 		$control_ops = array(
-			'width'		=> 500, 
-			'height'	=> 450, 
-			'id_base'	=> 'ale_about_widget' 
+			'width'		=> 500,
+			'height'	=> 450,
+			'id_base'	=> 'ale_about_widget'
 		);
 
 		/* Create the widget. */
-		$this->WP_Widget( 'ale_about_widget', __('Aletheme About Me', 'aletheme'), $widget_ops, $control_ops );
+		parent::__construct( 'ale_about_widget', __('Aletheme About Me', 'aletheme'), $widget_ops, $control_ops );
 	}
 
 	/**
 	 * Display Widget
 	 * @param array $args
-	 * @param array $instance 
+	 * @param array $instance
 	 */
-	public function widget( $args, $instance ) 
+	public function widget( $args, $instance )
 	{
 		extract( $args );
-		
+
 		$title = apply_filters('widget_title', $instance['title'] );
-		
+
 		$text = apply_filters('the_content', $instance['text']);
-		
+
 		/* Our variables from the widget settings. */
 		$image_id = $instance[$this->image_field];
-		
+
 		$image = new Aletheme_WidgetImageField( $this, $image_id );
-		
+
 		/* Before widget (defined by themes). */
 		echo $before_widget;
-		
+
 		// Display Widget
-		?> 
+		?>
         <?php /* Display the widget title if one was input (before and after defined by themes). */
 				if ( $title )
 					echo $before_title . $title . $after_title;
@@ -63,7 +63,7 @@ class Aletheme_About_Widget extends WP_Widget
 				<?php endif; ?>
 				<div class="text">
 					<?php echo $text; ?>
-				</div>	
+				</div>
             </div>
 		<?php
 		/* After widget (defined by themes). */
@@ -74,25 +74,25 @@ class Aletheme_About_Widget extends WP_Widget
 	 * Update Widget
 	 * @param array $new_instance
 	 * @param array $old_instance
-	 * @return array 
+	 * @return array
 	 */
-	public function update( $new_instance, $old_instance ) 
+	public function update( $new_instance, $old_instance )
 	{
 		$instance = $old_instance;
-		
+
 		$instance['title'] = strip_tags( $new_instance['title'] );
 		$instance['text'] = strip_tags( $new_instance['text'] );
-		
+
 		$instance[$this->image_field] = (int) $new_instance[$this->image_field];
 
 		return $instance;
 	}
-	
+
 	/**
 	 * Widget Settings
-	 * @param array $instance 
+	 * @param array $instance
 	 */
-	public function form( $instance ) 
+	public function form( $instance )
 	{
 		//default widget settings.
 		$defaults = array(
@@ -100,8 +100,8 @@ class Aletheme_About_Widget extends WP_Widget
 			'text'		=> "",
 			'image'		=> "",
 		);
-		$instance = wp_parse_args( (array) $instance, $defaults ); 
-		
+		$instance = wp_parse_args( (array) $instance, $defaults );
+
 		$image_id   = isset( $instance[$this->image_field]) ? (int) $instance[$this->image_field] : 0;
 		$image      = new Aletheme_WidgetImageField( $this, $image_id );
 		?>

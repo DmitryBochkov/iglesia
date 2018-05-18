@@ -15,6 +15,21 @@ jQuery(function($) {
         controlNav: false
     });
 
+    $('.flexslider').flexslider({
+        animation:'slide',
+        prevText:'<i class="fa fa-angle-left" aria-hidden="true"></i>',
+        nextText:'<i class="fa fa-angle-right" aria-hidden="true"></i>',
+        controlNav: false
+    });
+
+    $('.flexslider .flex-viewport').css('overflow', 'visible');
+
+    $('.menu-btn__box').on('click', function(event) {
+      $('.menu-btn__box .fa-bars').toggle();
+      $('.menu-btn__box .fa-times').toggle();
+      $('.top-nav').slideToggle();
+    });
+
 });
 
 Modernizr.addTest('ipad', function () {
@@ -387,4 +402,3 @@ jQuery(function($) {
         });
     }
 });
-

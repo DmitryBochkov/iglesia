@@ -1,0 +1,28 @@
+/* Your Custom code here */
+$grey: #d4dad9;
+$dark-grey: #959b9a;
+$dark: #262626;
+$yellow: #eedf9c;
+$purple: #804258;
+
+html {
+	box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+.cf:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.wrapper {
+  width: 96%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+@import "blocks/top-header";
+@import "blocks/home-slider";

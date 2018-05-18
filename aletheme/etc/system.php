@@ -1,6 +1,6 @@
 <?php
 /**
- * Add Needed Post Types 
+ * Add Needed Post Types
  */
 function ale_init_post_types() {
 	if (function_exists('aletheme_get_post_types')) {
@@ -24,7 +24,7 @@ function ale_init_taxonomies() {
 add_action('init', 'ale_init_taxonomies');
 
 /**
- * Initialize Theme Support Features 
+ * Initialize Theme Support Features
  */
 function ale_init_theme_support() {
 	if (function_exists('aletheme_get_images_sizes')) {
@@ -43,10 +43,10 @@ function ale_after_setup_theme() {
 
 	// add post thumbnails support
 	add_theme_support('post-thumbnails');
-	
-	// Set the theme's text domain using the unique identifier from above 
-	load_theme_textdomain('aletheme', THEME_PATH . '/lang');	
-	
+
+	// Set the theme's text domain using the unique identifier from above
+	load_theme_textdomain('aletheme', THEME_PATH . '/lang');
+
 	// add needed post formats to theme
 	if (function_exists('aletheme_get_post_formats')) {
 		add_theme_support('post-formats', aletheme_get_post_formats());
@@ -55,16 +55,15 @@ function ale_after_setup_theme() {
 add_action('after_setup_theme', 'ale_after_setup_theme');
 
 /**
- * Initialize Theme Navigation 
+ * Initialize Theme Navigation
  */
 function ale_init_navigation() {
 	if (function_exists('register_nav_menus')) {
 		register_nav_menus(array(
-			'header_left_menu'	=> __('Header Left Menu', 'aletheme'),
-            'header_right_menu'	=> __('Header Right Menu', 'aletheme'),
-            'footer_menu'	=> __('Footer Menu', 'aletheme'),
-            'aboutpage_menu'	=> __('About Page Menu', 'aletheme'),
-            'mobile_menu'	=> __('Mobile Menu', 'aletheme'),
+        'header_menu'	=> __('Header Menu', 'aletheme'),
+        'footer_menu'	=> __('Footer Menu', 'aletheme'),
+        'aboutpage_menu'	=> __('About Page Menu', 'aletheme'),
+        'mobile_menu'	=> __('Mobile Menu', 'aletheme'),
 		));
 	}
 }
@@ -100,7 +99,7 @@ function ale_add_post_type($name, $config, $singular = 'Entry', $multiple = 'Ent
 /**
  * Add custom image size wrapper
  * @param string $post_type
- * @param array $config 
+ * @param array $config
  */
 function ale_add_image_size($post_type, $config) {
 	add_image_size($config['name'], $config['width'], $config['height'], $config['crop']);
@@ -115,7 +114,7 @@ function ale_add_image_size($post_type, $config) {
  * @param string $multiple
  */
 function ale_add_taxonomy($name, $object_type, $config, $singular = 'Entry', $multiple = 'Entries') {
-	
+
 	if (!isset($config['labels'])) {
 		$config['labels'] = array(
 			'name' => $multiple,
@@ -131,17 +130,17 @@ function ale_add_taxonomy($name, $object_type, $config, $singular = 'Entry', $mu
 			'menu_name' => $singular,
 		);
 	}
-	
+
 	register_taxonomy($name, $object_type, $config);
 }
 
 /**
  * Add specific image sizes for custom post types.
- * @global object $post 
+ * @global object $post
  */
 function ale_alter_image(){
 	global $post;
-	
+
 	switch ($post->post_type) {
 		case 'press':
 
@@ -157,15 +156,15 @@ add_action('edit','ale_alter_image');
 
 /**
  * Remove unused image sizes for custom post types
- * 
+ *
  * @param type $available_sizes
- * @return type 
+ * @return type
  */
 function ale_init_custom_image_sizes($available_sizes) {
 	if (!@$_REQUEST['post_id'] || !($_post = get_post($_REQUEST['post_id']))) {
 		return $available_sizes;
 	}
-	
+
 	$default_sizes = array('thumbnail', 'medium', 'large');
 	$sizes = array();
 	foreach ($available_sizes as $name => $data) {
@@ -173,40 +172,40 @@ function ale_init_custom_image_sizes($available_sizes) {
 			$sizes[$name] = $data;
 		}
 	}
-	
+
 	return $sizes;
 }
 add_action('intermediate_image_sizes_advanced', 'ale_init_custom_image_sizes');
 
 function ale_change_toolbar() {
     global $wp_admin_bar;
-	
+
     $wp_admin_bar->add_menu(array(
         'id' => 'aletheme',
         'title' => '<span class="ab-icon"></span>',
         'href' => admin_url('themes.php?page=aletheme'),
 	));
-	
-	$wp_admin_bar->remove_node('wp-logo');  
+
+	$wp_admin_bar->remove_node('wp-logo');
 }
 add_action('admin_bar_menu', 'ale_change_toolbar', 40);
 
 
 // move admin bar to bottom
-function fb_change_toolbar_css() { 
-	
+function fb_change_toolbar_css() {
+
 	global $wp_admin_bar;
-	
+
 	if (!$wp_admin_bar) {
 		return;
 	}
-	
+
 	?>
 	<style type="text/css">
 		#wp-admin-bar-aletheme .ab-icon {
 			background-image: url("<?php echo ALETHEME_URL?>/assets/images/aletheme_icon_16_light.png");
 		}
-	</style> <?php 
+	</style> <?php
 }
 // on backend area
 add_action( 'admin_head', 'fb_change_toolbar_css' );

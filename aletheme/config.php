@@ -1,7 +1,7 @@
 <?php
 /**
  * Get current theme options
- * 
+ *
  * @return array
  */
 function aletheme_get_options() {
@@ -23,11 +23,11 @@ function aletheme_get_options() {
         'attachment'=>'scroll'
     );
 
-	
+
 	$imagepath =  ALETHEME_URL . '/assets/images/';
-	
+
 	$options = array();
-		
+
 	$options[] = array("name" => "Theme",
 						"type" => "heading");
 
@@ -42,6 +42,12 @@ function aletheme_get_options() {
                         "id" => "ale_sitelogofooter",
                         "std" => "",
                         "type" => "upload");
+
+    $options[] = array( "name" => "Insert the slider slug",
+                        "desc" => "Get the slider on the Sliders settings page",
+                        "id" => "ale_homesliderslug",
+                        "std" => "",
+                        "type" => "text");
 
     $options[] = array( 'name' => "Manage Background",
                         'desc' => "Select the background color, or upload a custom background image. Default background is the #f5f5f5 color",
@@ -184,24 +190,9 @@ function aletheme_get_options() {
 						"id" => "ale_fb",
 						"std" => "",
 						"type" => "text");
-    $options[] = array( "name" => "Google+",
-                        "desc" => "Your google+ profile URL.",
-                        "id" => "ale_gog",
-                        "std" => "",
-                        "type" => "text");
-    $options[] = array( "name" => "Pinterest",
-                        "desc" => "Your pinteres profile URL.",
-                        "id" => "ale_pint",
-                        "std" => "",
-                        "type" => "text");
-    $options[] = array( "name" => "Flickr",
-                        "desc" => "Your flickr profile URL.",
-                        "id" => "ale_flickr",
-                        "std" => "",
-                        "type" => "text");
-    $options[] = array( "name" => "Linkedin",
-                        "desc" => "Your linked profile URL.",
-                        "id" => "ale_linked",
+    $options[] = array( "name" => "Vimeo",
+                        "desc" => "Your Vimeo profile URL.",
+                        "id" => "ale_vm",
                         "std" => "",
                         "type" => "text");
     $options[] = array( "name" => "Instagram",
@@ -220,13 +211,13 @@ function aletheme_get_options() {
                         "std" => "1",
                         "type" => "checkbox");
 
-	
+
 	$options[] = array( "name" => "Facebook Application ID",
 						"desc" => "If you have Application ID you can connect the blog to your Facebook Profile and monitor statistics there.",
 						"id" => "ale_fb_id",
 						"std" => "",
 						"type" => "text");
-	
+
 	$options[] = array( "name" => "Enable Open Graph",
 						"desc" => "The <a href=\"http://www.ogp.me/\">Open Graph</a> protocol enables any web page to become a rich object in a social graph.",
 						"id" => "ale_og_enabled",
@@ -234,17 +225,17 @@ function aletheme_get_options() {
 						"type" => "checkbox");
 
 
-	
+
 	$options[] = array( "name" => "Advanced Settings",
 						"type" => "heading");
 
-	
+
 	$options[] = array( "name" => "Google Analytics",
 						"desc" => "Please insert your Google Analytics code here. Example: <strong>UA-22231623-1</strong>",
 						"id" => "ale_ga",
 						"std" => "",
 						"type" => "text");
-	
+
 	$options[] = array( "name" => "Footer Code",
 						"desc" => "If you have anything else to add in the footer - please add it here.",
 						"id" => "ale_footer_info",
@@ -273,7 +264,7 @@ function aletheme_get_options() {
                             'image_2' => $imagepath.'/2cl.png',
                             'image_3' => $imagepath.'/2cr.png', ),
         );
-	
+
 	return $options;
 }
 
@@ -300,10 +291,10 @@ jQuery(document).ready(function() {
 /**
  * Add Metaboxes
  * @param array $meta_boxes
- * @return array 
+ * @return array
  */
 function aletheme_metaboxes($meta_boxes) {
-	
+
 	$meta_boxes = array();
 
     $prefix = "ale_";
@@ -793,7 +784,7 @@ function aletheme_metaboxes($meta_boxes) {
 
 /**
  * Get image sizes for images
- * 
+ *
  * @return array
  */
 function aletheme_get_images_sizes() {
@@ -839,8 +830,8 @@ function aletheme_get_images_sizes() {
 }
 
 /**
- * Add post types that are used in the theme 
- * 
+ * Add post types that are used in the theme
+ *
  * @return array
  */
 function aletheme_get_post_types() {
@@ -884,7 +875,7 @@ function aletheme_get_post_types() {
 
 /**
  * Add taxonomies that are used in theme
- * 
+ *
  * @return array
  */
 function aletheme_get_taxonomies() {
@@ -927,7 +918,7 @@ function aletheme_get_taxonomies() {
 
 /**
  * Add post formats that are used in theme
- * 
+ *
  * @return array
  */
 function aletheme_get_post_formats() {
@@ -936,7 +927,7 @@ function aletheme_get_post_formats() {
 
 /**
  * Get sidebars list
- * 
+ *
  * @return array
  */
 function aletheme_get_sidebars() {
@@ -958,7 +949,7 @@ function aletheme_get_sliders() {
 
 /**
  * Post types where metaboxes should show
- * 
+ *
  * @return array
  */
 function aletheme_get_post_types_with_gallery() {

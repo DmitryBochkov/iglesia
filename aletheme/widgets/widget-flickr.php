@@ -1,9 +1,9 @@
 <?php
-class Aletheme_Flickr_Widget extends WP_Widget 
+class Aletheme_Flickr_Widget extends WP_Widget
 {
 	public $cache_key;
-	
-	public function __construct() 
+
+	public function __construct()
 	{
 		/* Widget settings. */
 		$widget_ops = array( 'classname' => 'aletheme-flickr', 'description' => 'Display a Flickr Photostream' );
@@ -11,31 +11,31 @@ class Aletheme_Flickr_Widget extends WP_Widget
 		/* Widget control settings. */
 		$control_ops = array( 'width' => 500);
 		/* Create the widget. */
-		$this->WP_Widget( 'Aletheme_Flickr_Widget-widget', 'Aletheme Flickr', $widget_ops, $control_ops);
-		
+		parent::__construct( 'Aletheme_Flickr_Widget-widget', 'Aletheme Flickr', $widget_ops, $control_ops);
+
 		$this->cache_key = 'alethemeflickrcache';
 	}
-	
-	public function widget($args, $instance) 
+
+	public function widget($args, $instance)
 	{
 		extract($args);
 
 		$title = apply_filters('widget_title', $instance['title'] );
 		$do_cache = $instance['do_cache'];
 		$num_items = $instance['num_items'];
-		
+
 		$pix = wp_cache_get($this->cache_key);
-		
+
 		if($do_cache && $pix) {
-			
+
 		} else {
 			$rss = $this->getRSS($instance);
-			
+
 			if (!$rss) {
 				echo '<p>No content found</p>';
 				return;
 			}
-			
+
 			$pix = array();
 
 			if($num_items != "random") {
@@ -44,8 +44,8 @@ class Aletheme_Flickr_Widget extends WP_Widget
 				$rand_keys = array_rand($rss['items'], 1);
 				$items = array($rss['items'][$rand_keys]);
 			}
-			
-			
+
+
 			# builds html from array
 			foreach ( $items as $item ) {
 				$baseurl = str_replace("_m.jpg", "", $item["m_url"]);
@@ -56,14 +56,14 @@ class Aletheme_Flickr_Widget extends WP_Widget
 					'medium' => $baseurl . ".jpg",
 					'large' => $baseurl . "_b.jpg"
 				);
-				
+
 				#check if there is an image title (for html validation purposes)
 				if($item['title'] !== "") {
 					$pic_title = htmlspecialchars(stripslashes($item['title']));
 				} else {
 					$pic_title = 'Untitled Image';
 				}
-				
+
 				$pix[] = array(
 					'title'			=> $pic_title,
 					'author_name'	=> $item['author_name'],
@@ -73,12 +73,12 @@ class Aletheme_Flickr_Widget extends WP_Widget
 					'url'			=> $item['url'],
 				);
 			}
-			
+
 			if ($do_cache) {
 				wp_cache_set($this->cache_key, $pix);
 			}
 		}
-		
+
 		echo $before_widget;
 		if ( $title ) echo $before_title . $title . $after_title;
 		?>
@@ -96,8 +96,8 @@ class Aletheme_Flickr_Widget extends WP_Widget
 		echo $after_widget;
 		return;
 	}
-	
-	public function update($new_instance, $old_instance) 
+
+	public function update($new_instance, $old_instance)
 	{
 		$instance = $old_instance;
 
@@ -108,13 +108,13 @@ class Aletheme_Flickr_Widget extends WP_Widget
 		$instance['id'] = strip_tags( $new_instance['id']);
 		$instance['do_cache'] = strip_tags( $new_instance['do_cache']);
 		$instance['num_items'] = strip_tags( $new_instance['num_items']);
-		
+
 		wp_cache_delete($this->cache_key);
 
 		return $instance;
 	}
-	
-	public function form($instance) 
+
+	public function form($instance)
 	{
 		$defaults = array(
 			'title' => 'Flickr Photos',
@@ -133,7 +133,7 @@ class Aletheme_Flickr_Widget extends WP_Widget
 				<label for="<?php echo $this->get_field_id( 'title' ); ?>">Title:</label>
 				<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" />
 			</p>
-			
+
 			<p>
 				<label for="<?php echo $this->get_field_id( 'num_items' ); ?>">Display</label>
 				<select name="<?php echo $this->get_field_name( 'num_items' ); ?>" id="<?php echo $this->get_field_id( 'num_items' ); ?>">
@@ -151,7 +151,7 @@ class Aletheme_Flickr_Widget extends WP_Widget
 				</select>
 				photos.
 			</p>
-			
+
 			<p class="id_parent">
 				<label for="<?php echo $this->get_field_id( 'id' ); ?>">User or Group ID</label>
 				<input name="<?php echo $this->get_field_name( 'id' ); ?>" type="text" id="<?php echo $this->get_field_id( 'id' ); ?>" value="<?php echo $instance['id']; ?>" size="20" />
@@ -173,11 +173,11 @@ class Aletheme_Flickr_Widget extends WP_Widget
 			</p>
 		<?php
 	}
-	
+
 	public function getRSS($instance)
 	{
 		$format = "php_serial";
-		
+
 		if ($instance['type'] == "user") {
 			$rss_url = 'http://api.flickr.com/services/feeds/photos_public.gne?id=' . $instance['id'] . '&tags=' . $instance['tags'] . '&format=' . $format;
 		} elseif ($instance['type'] == "favorite") {
@@ -192,15 +192,15 @@ class Aletheme_Flickr_Widget extends WP_Widget
 			print '<strong>No "type" parameter has been setup. Check your settings, or provide the parameter as an argument.</strong>';
 			die();
 		}
-		
+
 		$result = wp_remote_get($rss_url);
-		
+
 		if (!isset($result['body'])) {
 			return false;
 		}
-		
+
 		$response = unserialize($result['body']);
-		
+
 		return $response;
 	}
 }
