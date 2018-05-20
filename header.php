@@ -23,7 +23,7 @@
 			</div>
 
 			<div class="header-column logo">
-				<a href="<?php home_url( '/' ); ?>">
+				<a href="<?php echo home_url( '/' ); ?>">
 					<img src="<?php echo ale_get_option('sitelogo'); ?>" alt="">
 				</a>
 			</div>
@@ -62,3 +62,11 @@
 			</div>
 		</nav>
 	</header>
+
+<?php if ( !is_page_template( 'page-home.php' )): ?>
+	<section class="inner-header">
+		<div class="wrapper">
+			<?php echo get_breadcrumbs(); ?>
+		</div>
+	</section>
+<?php endif; ?>

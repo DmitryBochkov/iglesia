@@ -15,6 +15,12 @@ jQuery(function($) {
         controlNav: false
     });
 
+    $('.latest-tweets').flexslider({
+        animation:'slide',
+        selector: 'ul > li',
+        directionNav: false
+    });
+
     $('.flexslider').flexslider({
         animation:'slide',
         prevText:'<i class="fa fa-angle-left" aria-hidden="true"></i>',

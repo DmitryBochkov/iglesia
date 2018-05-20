@@ -1,0 +1,211 @@
+.main-footer {
+  // min-height: 470px;
+  background-color: #fff;
+  background-image: url(img/footer.png);
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  font-family: Arial, sans-serif;
+  color: #b4b4b4;
+
+  &__top {
+    .wrapper {
+      min-height: 350px;
+      display: -webkit-flex;
+      display: -ms-flex;
+      display: flex;
+      flex-wrap: wrap;
+      padding-top: 75px;
+    }
+    .logo {
+      width: 22.2%;
+    }
+    .info-menu {
+      width: 22.2%;
+      h5 {
+        margin: 10px 0 20px;
+        font-size: 18px;
+        color: #000;
+      }
+      .footermenu {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        font-size: 11px;
+        line-height: 2.18;
+
+        a {
+          color: inherit;
+          text-decoration: none;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    .contacts {
+      width: 22.2%;
+      h5 {
+        margin: 10px 0 20px;
+        font-size: 18px;
+        color: #000;
+      }
+      .footer_phone {
+        margin-bottom: 10px;
+        font-size: 18px;
+      }
+      .footer_address {
+        margin-bottom: 10px;
+        font-size: 12px;
+      }
+      .footer_mail {
+        font-size: 11px;
+
+        a {
+          color: inherit;
+          text-decoration: none;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    .twitter {
+      width: 33.33%;
+
+      .widget_latest_tweets_widget {
+        position: relative;
+        padding-left: 40px;
+        h5 {
+          margin: 0;
+          color: #b4b4b4;
+          font-size: 12px;
+          font-family: Arial, sans-serif;
+          &:before {
+            content: "\f099";
+            font: normal normal normal 20px/1 FontAwesome;
+            color: #5ad2ff;
+            margin-right: 5px;
+            display: inline-block;
+            vertical-align: middle;
+          }
+        }
+      }
+      .latest-tweets {
+        font-size: 11px;
+        line-height: 1.8;
+
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          margin-top: 20px;
+        }
+        a {
+          color: inherit;
+          text-decoration: none;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        time {
+          font-size: 10px;
+        }
+      }
+      .flex-control-nav {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        li {
+          display: inline-block;
+          vertical-align: top;
+        }
+        a {
+          position: relative;
+          display: block;
+          padding: 7px;
+          font-size: 0;
+          color: transparent;
+          cursor: pointer;
+
+          &.flex-active {
+            &:before {
+              opacity: 0.4;
+            }
+          }
+
+          &:before {
+            content: '';
+            position: absolute;
+            display: block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #000;
+            opacity: 0.1;
+            left: 50%;
+            top: 50%;
+            margin-left: -3px;
+            margin-top: -3px;
+          }
+        }
+      }
+    }
+  }
+
+  &__bottom {
+    position: relative;
+    color: #d4dad9;
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      display: block;
+      top: 0;
+      width: 37%;
+      height: 1px;
+      background-color: #f2f2f2;
+    }
+    &:before {
+      left: 0;
+    }
+    &:after {
+      right: 0;
+    }
+    .wrapper {
+      min-height: 120px;
+      display: -webkit-flex;
+      display: -ms-flex;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .copyright {
+      width: 35%;
+      font-family: Arial sans-serif;
+      font-size: 11px;
+    }
+    .social {
+      width: 35%;
+      // font-size: 14px;
+      text-align: right;
+      font-size: 20px;
+      color: $grey;
+
+      a {
+        color: inherit;
+        transition: all 0.2s ease-in-out;
+        &:hover {
+          color: $purple;
+        }
+      }
+      i {
+        margin-left: 30px;
+      }
+    }
+  }
+}

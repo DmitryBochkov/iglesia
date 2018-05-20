@@ -3,7 +3,7 @@
  * Get option wrapper
  * @param mixed $name
  * @param mixed $default
- * @return mixed 
+ * @return mixed
  */
 function ale_option($name, $default = false) {
 	echo ale_get_option($name, $default);
@@ -29,7 +29,7 @@ function ale_get_option($name, $default = false) {
  * Echo meta for post
  * @param string $key
  * @param boolean $single
- * @param mixed $post_id 
+ * @param mixed $post_id
  */
 function ale_meta($key, $single = true, $post_id = null) {
 	echo ale_get_meta($key, $single, $post_id);
@@ -38,7 +38,7 @@ function ale_meta($key, $single = true, $post_id = null) {
  * Find meta for post
  * @param string $key
  * @param boolean $single
- * @param mixed $post_id 
+ * @param mixed $post_id
  */
 function ale_get_meta($key, $single = true, $post_id = null) {
 	if (null === $post_id) {
@@ -51,24 +51,24 @@ function ale_get_meta($key, $single = true, $post_id = null) {
  * Apply filters to post meta
  * @param string $key
  * @param string $filter
- * @param mixed $post_id 
+ * @param mixed $post_id
  */
 function ale_filtered_meta($key, $filter = 'the_content', $post_id = null) {
 	echo apply_filters($filter, ale_get_meta($key, true, $post_id));
 }
 
 /**
- * Display permalink 
- * 
+ * Display permalink
+ *
  * @param int|string $system
- * @param int $isCat 
+ * @param int $isCat
  */
 function ale_permalink($system, $isCat = false) {
     echo ale_get_permalink($system, $isCat);
 }
 /**
  * Get permalink for page, post or category
- * 
+ *
  * @param int|string $system
  * @param bool $isCat
  * @return string
@@ -81,7 +81,7 @@ function ale_get_permalink($system, $isCat = 0)  {
         return get_category_link($system);
     } else {
         $page = ale_get_page($system);
-        
+
         return null === $page ? '' : get_permalink($page->ID);
     }
 }
@@ -94,9 +94,9 @@ function ale_excerpt() {
 }
 /**
  * Get only excerpt, without content.
- * 
+ *
  * @global object $post
- * @return string 
+ * @return string
  */
 function ale_get_excerpt() {
     global $post;
@@ -125,20 +125,20 @@ function ale_get_first_category() {
 }
 
 /**
- * Get page by name, id or slug. 
+ * Get page by name, id or slug.
  * @global object $wpdb
  * @param mixed $name
- * @return object 
+ * @return object
  */
 function ale_get_page($slug) {
     global $wpdb;
-    
+
     if (is_numeric($slug)) {
         $page = get_page($slug);
     } else {
         $page = $wpdb->get_row($wpdb->prepare("SELECT DISTINCT * FROM $wpdb->posts WHERE post_name=%s AND post_status=%s", $slug, 'publish'));
     }
-    
+
     return $page;
 }
 
@@ -173,7 +173,7 @@ function ale_get_subpages($id) {
 function ale_page_links() {
 	global $wp_query, $wp_rewrite;
 	$wp_query->query_vars['paged'] > 1 ? $current = $wp_query->query_vars['paged'] : $current = 1;
- 
+
 	$pagination = array(
 		'base' => @add_query_arg('page','%#%'),
 		'format' => '',
@@ -184,13 +184,13 @@ function ale_page_links() {
 		'next_text' => 'Следующие посты',
 		'prev_text' => 'Предыдущие посты'
 		);
- 
+
 	if( $wp_rewrite->using_permalinks() )
 		$pagination['base'] = user_trailingslashit( trailingslashit( remove_query_arg( 's', get_pagenum_link( 1 ) ) ) . 'page/%#%/', 'paged' );
- 
+
 	if( !empty($wp_query->query_vars['s']) )
 		$pagination['add_args'] = array( 's' => get_query_var( 's' ) );
- 
+
 	echo paginate_links($pagination);
 }
 
@@ -223,9 +223,9 @@ function ale_page_links_custom($custom_query) {
  * Generate random number
  *
  * Creates a 4 digit random number for used
- * mostly for unique ID creation. 
- * 
- * @return integer 
+ * mostly for unique ID creation.
+ *
+ * @return integer
  */
 function ale_get_random_number() {
 	return substr( md5( uniqid( rand(), true) ), 0, 4 );
@@ -233,8 +233,8 @@ function ale_get_random_number() {
 
 /**
  * Retreive Google Fonts List.
- * 
- * @return array 
+ *
+ * @return array
  */
 function ale_get_google_webfonts()
 {
@@ -981,7 +981,7 @@ function ale_get_favicon() {
 
 /**
  * Get template part
- * 
+ *
  * @param string $slug
  * @param string $name
  */
@@ -991,7 +991,7 @@ function ale_part($slug, $name = null) {
 
 /**
  * Page Title Wrapper
- * @param type $title 
+ * @param type $title
  */
 function ale_page_title($title) {
 	echo ale_get_page_title($title);
@@ -1002,7 +1002,7 @@ function ale_get_page_title($title) {
 
 /**
  * Find if the current browser is on mobile device
- * @return boolean 
+ * @return boolean
  */
 function is_mobile() {
 	if(preg_match('/(alcatel|amoi|android|avantgo|blackberry|benq|cell|cricket|docomo|elaine|htc|iemobile|iphone|ipad|ipaq|ipod|j2me|java|midp|mini|mmp|mobi|motorola|nec-|nokia|palm|panasonic|philips|phone|sagem|sharp|sie-|smartphone|sony|symbian|t-mobile|telus|up\.browser|up\.link|vodafone|wap|webos|wireless|xda|xoom|zte)/i', $_SERVER['HTTP_USER_AGENT'])) {
@@ -1015,17 +1015,17 @@ function is_mobile() {
 function array_put_to_position(&$array, $object, $position, $name = null) {
 	$count = 0;
 	$return = array();
-	foreach ($array as $k => $v) {  
+	foreach ($array as $k => $v) {
 			// insert new object
-			if ($count == $position) {  
+			if ($count == $position) {
 					if (!$name) $name = $count;
 					$return[$name] = $object;
 					$inserted = true;
-			}  
+			}
 			// insert old object
 			$return[$k] = $v;
 			$count++;
-	}  
+	}
 	if (!$name) $name = $count;
 	if (!$inserted) $return[$name];
 	$array = $return;
@@ -1035,14 +1035,14 @@ function array_put_to_position(&$array, $object, $position, $name = null) {
 
 /**
  * Get archives by year
- * 
+ *
  * @global object $wpdb
  * @param string $year
- * @return array 
+ * @return array
  */
 function ale_archives_get_by_year($year = "") {
 	global $wpdb;
-	
+
 	$where = "";
 	if (!empty($year)) {
 		$where = "AND YEAR(post_date) = " . ((int) $year);
@@ -1058,9 +1058,9 @@ function ale_archives_get_by_year($year = "") {
 
 /**
  * Get archives years list
- * 
+ *
  * @global object $wpdb
- * @return array 
+ * @return array
  */
 function ale_archives_get_years() {
 	global $wpdb;
@@ -1075,15 +1075,15 @@ function ale_archives_get_years() {
 
 /**
  * Get archives months list
- * 
- * @return type 
+ *
+ * @return type
  */
 function ale_archives_get_months() {
 	return array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
 }
 
 /**
- * Display Archives 
+ * Display Archives
  */
 function ale_archives($delim = '&nbsp;/&nbsp;') {
     $year = null;
@@ -1141,11 +1141,11 @@ function ale_archives($delim = '&nbsp;/&nbsp;') {
 
 /**
  * Add combined actions for AJAX.
- * 
+ *
  * @param string $tag
  * @param string $function_to_add
  * @param integer $priority
- * @param integer $accepted_args 
+ * @param integer $accepted_args
  */
 function ale_add_ajax_action($tag, $function_to_add, $priority = 10, $accepted_args = 1) {
 	add_action('wp_ajax_' . $tag, $function_to_add, $priority, $accepted_args);
@@ -1155,7 +1155,7 @@ function ale_add_ajax_action($tag, $function_to_add, $priority = 10, $accepted_a
 /**
  * Get contact form 7 from content
  * @param string $content
- * @return string 
+ * @return string
  */
 function ale_contact7_form($content) {
 	$matches = array();
@@ -1176,7 +1176,7 @@ function ale_remove_contact7_form($content) {
 /**
  * Check if it's a blog page
  * @global object $post
- * @return boolean 
+ * @return boolean
  */
 function ale_is_blog () {
 	global  $post;
@@ -1194,6 +1194,16 @@ if ( function_exists('register_sidebar') ) {
             'after_widget' => '</div>',
             'before_title' => '<p class="caption">',
             'after_title' => '</p><div class="line"></div>',
+        ));
+
+        register_sidebar(array(
+            'name' => 'Footer Sidebar',
+            'id' => 'footer-sidebar',
+            'description' => 'Appears as the footer sidebar on all pages',
+            'before_widget' => '<div id="%1$s" class="widget %2$s">',
+            'after_widget' => '</div>',
+            'before_title' => '<h5>',
+            'after_title' => '</h5>',
         ));
 
 }

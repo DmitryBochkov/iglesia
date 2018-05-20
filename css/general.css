@@ -22,6 +22,25 @@ html {
   margin: 0 auto;
 }
 
+.container {
+  padding-top: 40px;
+}
+.container .page-title {
+  margin: 0;
+  margin-bottom: 30px;
+  text-align: center;
+  color: #804258;
+  font-family: 'Playfair Display SC', serif;
+  font-size: 64px;
+}
+.container .page-content {
+  padding-bottom: 40px;
+  color: #a3a3a3;
+  font-size: 14px;
+  line-height: 1.714;
+  text-align: center;
+}
+
 .top-header {
   position: relative;
   height: 105px;
@@ -292,6 +311,31 @@ html {
   border-bottom: 3px solid #eedf9c;
 }
 
+.inner-header {
+  background-color: #804258;
+  color: #b18b99;
+}
+.inner-header .wrapper {
+  padding: 20px 0;
+  min-height: 68px;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.inner-header .breadcrumbs {
+  font-family: 'Droid Serif';
+  font-size: 12px;
+}
+.inner-header .breadcrumbs a {
+  color: #fff;
+  text-decoration: none;
+}
+.inner-header .breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
 .home-slider {
   overflow: hidden;
   position: relative;
@@ -381,6 +425,238 @@ html {
 .slides img {
   max-width: 100%;
   height: auto;
+}
+
+.main-footer {
+  background-color: #fff;
+  background-image: url(img/footer.png);
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  font-family: Arial, sans-serif;
+  color: #b4b4b4;
+}
+.main-footer__top .wrapper {
+  min-height: 350px;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 75px;
+}
+.main-footer__top .logo {
+  width: 22.2%;
+}
+.main-footer__top .info-menu {
+  width: 22.2%;
+}
+.main-footer__top .info-menu h5 {
+  margin: 10px 0 20px;
+  font-size: 18px;
+  color: #000;
+}
+.main-footer__top .info-menu .footermenu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 11px;
+  line-height: 2.18;
+}
+.main-footer__top .info-menu .footermenu a {
+  color: inherit;
+  text-decoration: none;
+}
+.main-footer__top .info-menu .footermenu a:hover {
+  text-decoration: underline;
+}
+.main-footer__top .contacts {
+  width: 22.2%;
+}
+.main-footer__top .contacts h5 {
+  margin: 10px 0 20px;
+  font-size: 18px;
+  color: #000;
+}
+.main-footer__top .contacts .footer_phone {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+.main-footer__top .contacts .footer_address {
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+.main-footer__top .contacts .footer_mail {
+  font-size: 11px;
+}
+.main-footer__top .contacts .footer_mail a {
+  color: inherit;
+  text-decoration: none;
+}
+.main-footer__top .contacts .footer_mail a:hover {
+  text-decoration: underline;
+}
+.main-footer__top .twitter {
+  width: 33.33%;
+}
+.main-footer__top .twitter .widget_latest_tweets_widget {
+  position: relative;
+  padding-left: 40px;
+}
+.main-footer__top .twitter .widget_latest_tweets_widget h5 {
+  margin: 0;
+  color: #b4b4b4;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+}
+.main-footer__top .twitter .widget_latest_tweets_widget h5:before {
+  content: "\f099";
+  font: normal normal normal 20px/1 FontAwesome;
+  color: #5ad2ff;
+  margin-right: 5px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.main-footer__top .twitter .latest-tweets {
+  font-size: 11px;
+  line-height: 1.8;
+}
+.main-footer__top .twitter .latest-tweets ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 20px;
+}
+.main-footer__top .twitter .latest-tweets a {
+  color: inherit;
+  text-decoration: none;
+}
+.main-footer__top .twitter .latest-tweets a:hover {
+  text-decoration: underline;
+}
+.main-footer__top .twitter .latest-tweets time {
+  font-size: 10px;
+}
+.main-footer__top .twitter .flex-control-nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.main-footer__top .twitter .flex-control-nav li {
+  display: inline-block;
+  vertical-align: top;
+}
+.main-footer__top .twitter .flex-control-nav a {
+  position: relative;
+  display: block;
+  padding: 7px;
+  font-size: 0;
+  color: transparent;
+  cursor: pointer;
+}
+.main-footer__top .twitter .flex-control-nav a.flex-active:before {
+  opacity: 0.4;
+}
+.main-footer__top .twitter .flex-control-nav a:before {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #000;
+  opacity: 0.1;
+  left: 50%;
+  top: 50%;
+  margin-left: -3px;
+  margin-top: -3px;
+}
+.main-footer__bottom {
+  position: relative;
+  color: #d4dad9;
+}
+.main-footer__bottom:before, .main-footer__bottom:after {
+  content: '';
+  position: absolute;
+  display: block;
+  top: 0;
+  width: 37%;
+  height: 1px;
+  background-color: #f2f2f2;
+}
+.main-footer__bottom:before {
+  left: 0;
+}
+.main-footer__bottom:after {
+  right: 0;
+}
+.main-footer__bottom .wrapper {
+  min-height: 120px;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.main-footer__bottom .copyright {
+  width: 35%;
+  font-family: Arial sans-serif;
+  font-size: 11px;
+}
+.main-footer__bottom .social {
+  width: 35%;
+  text-align: right;
+  font-size: 20px;
+  color: #d4dad9;
+}
+.main-footer__bottom .social a {
+  color: inherit;
+  transition: all 0.2s ease-in-out;
+}
+.main-footer__bottom .social a:hover {
+  color: #804258;
+}
+.main-footer__bottom .social i {
+  margin-left: 30px;
+}
+
+.contacts-meta {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  flex-wrap: wrap;
+}
+.contacts-meta__column {
+  width: 24%;
+  margin-left: 9.33%;
+}
+.contacts-meta__column i {
+  margin-right: 8px;
+  color: #fce374;
+  font-size: 17px;
+}
+.contacts-meta__column span {
+  display: block;
+  color: #a3a3a3;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+.contacts-meta__column p {
+  margin: 0;
+  color: #000;
+  font-size: 15px;
+}
+.contacts-meta .contacts-meta__column--phone p {
+  font-size: 28px;
+}
+.contacts-meta .contacts-meta__column--email a {
+  color: inherit;
+  text-decoration: none;
+}
+.contacts-meta .contacts-meta__column--email a:hover {
+  text-decoration: underline;
 }
 
 /*# sourceMappingURL=general.css.map */

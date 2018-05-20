@@ -4,6 +4,7 @@ $dark-grey: #959b9a;
 $dark: #262626;
 $yellow: #eedf9c;
 $purple: #804258;
+$bright-yellow: #fce374;
 
 html {
 	box-sizing: border-box;
@@ -24,5 +25,27 @@ html {
   margin: 0 auto;
 }
 
+.container {
+	padding-top: 40px;
+
+	.page-title {
+		margin: 0;
+		margin-bottom: 30px;
+		text-align: center;
+		color: $purple;
+		font-family: 'Playfair Display SC', serif;
+		font-size: 64px;
+	}
+	.page-content {
+		padding-bottom: 40px;
+		color: #a3a3a3;
+		font-size: 14px;
+		line-height: 1.714;
+		text-align: center;
+	}
+}
+
 @import "blocks/top-header";
 @import "blocks/home-slider";
+@import "blocks/footer";
+@import "blocks/contacts-page";
