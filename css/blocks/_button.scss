@@ -1,0 +1,19 @@
+.button {
+  display: inline-block;
+  padding: 15px 10px;
+  text-align: center;
+  background-color: $purple;
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+
+  &--large {
+    min-width: 166px;
+  }
+}

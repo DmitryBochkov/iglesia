@@ -172,7 +172,7 @@ if (!function_exists('ale_button')) {
 			'size' => 'small',
 			'type' => 'round'
 	    ), $atts));
-		
+
 	   return '<a target="'.$target.'" class="ale-button '.$size.' '.$style.' '. $type .'" href="'.$url.'">' . do_shortcode($content) . '</a>';
 	}
 	add_shortcode('ale_button', 'ale_button');
@@ -188,7 +188,7 @@ if (!function_exists('ale_alert')) {
 		extract(shortcode_atts(array(
 			'style'   => 'white'
 	    ), $atts));
-		
+
 	   return '<div class="ale-alert '.$style.'">' . do_shortcode($content) . '</div>';
 	}
 	add_shortcode('ale_alert', 'ale_alert');
@@ -205,7 +205,7 @@ if (!function_exists('ale_toggle')) {
 			'title'    	 => 'Title goes here',
 			'state'		 => 'open'
 	    ), $atts));
-	
+
 		return "<div data-id='".$state."' class=\"ale-toggle\"><span class=\"ale-toggle-title\">". $title ."</span><div class=\"ale-toggle-inner\">". do_shortcode($content) ."</div></div>";
 	}
 	add_shortcode('ale_toggle', 'ale_toggle');
@@ -220,33 +220,33 @@ if (!function_exists('ale_tabs')) {
 	function ale_tabs( $atts, $content = null ) {
 		$defaults = array();
 		extract( shortcode_atts( $defaults, $atts ) );
-		
+
 		STATIC $i = 0;
 		$i++;
 
 		// Extract the tab titles for use in the tab widget.
 		preg_match_all( '/tab title="([^\"]+)"/i', $content, $matches, PREG_OFFSET_CAPTURE );
-		
+
 		$tab_titles = array();
 		if( isset($matches[1]) ){ $tab_titles = $matches[1]; }
-		
+
 		$output = '';
-		
+
 		if( count($tab_titles) ){
 		    $output .= '<div id="ale-tabs-'. $i .'" class="ale-tabs"><div class="ale-tab-inner">';
 			$output .= '<ul class="ale-nav ale-clearfix">';
-			
+
 			foreach( $tab_titles as $tab ){
 				$output .= '<li><a href="#ale-tab-'. sanitize_title( $tab[0] ) .'">' . $tab[0] . '</a></li>';
 			}
-		    
+
 		    $output .= '</ul>';
 		    $output .= do_shortcode( $content );
 		    $output .= '</div></div>';
 		} else {
 			$output .= do_shortcode( $content );
 		}
-		
+
 		return $output;
 	}
 	add_shortcode( 'ale_tabs', 'ale_tabs' );
@@ -256,7 +256,7 @@ if (!function_exists('ale_tab')) {
 	function ale_tab( $atts, $content = null ) {
 		$defaults = array( 'title' => 'Tab' );
 		extract( shortcode_atts( $defaults, $atts ) );
-		
+
 		return '<div id="ale-tab-'. sanitize_title( $title ) .'" class="ale-tab">'. do_shortcode( $content ) .'</div>';
 	}
 	add_shortcode( 'ale_tab', 'ale_tab' );
@@ -403,12 +403,15 @@ if (!function_exists('ale_map')) {
                     var map_options = {
                         zoom: 15,
                         center: location,
+												scrollwheel: false,
+												styles: <?php echo ale_get_option('mapstyle'); ?>,
                         mapTypeId: google.maps.MapTypeId.ROADMAP
                     }
                     map_<?php echo $map_id ; ?> = new google.maps.Map(document.getElementById("<?php echo $map_id ; ?>"), map_options);
                     var marker = new google.maps.Marker({
                         position: location,
-                        map: map_<?php echo $map_id ; ?>
+                        map: map_<?php echo $map_id ; ?>,
+												icon: "<?php echo ale_get_option('mapicon'); ?>"
                     });
                 }
                 ale_run_map_<?php echo $map_id ; ?>();

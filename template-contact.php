@@ -35,27 +35,48 @@ get_header();
 					</div>
 				</div>
 
-				<form method="post" action="<?php the_permalink();?>">
-						<?php if (isset($_GET['success'])) : ?>
-								<p class="success"><?php _e('Thank you for your message!', 'aletheme')?></p>
-						<?php endif; ?>
-						<?php if (isset($error) && isset($error['msg'])) : ?>
-								<p class="error"><?php echo $error['msg']?></p>
-						<?php endif; ?>
+				<div class="contact-form">
+					<div class="iner-page-title">
+						<h3 class="iner-title font-3"><?php _e( 'Contact form', 'igl' ); ?></h3>
+					</div>
 
-						<div class="form">
-								<input name="contact[name]" type="text" placeholder="Your Name (required)" value="<?php echo isset($_POST['contact']['name']) ? $_POST['contact']['name'] : ''?>" required="required" id="contact-form-name" />
-								<input name="contact[email]" type="email" placeholder="Email (required)" value="<?php echo isset($_POST['contact']['email']) ? $_POST['contact']['email'] : ''?>" required="required" id="contact-form-email" />
-								<input name="contact[phone]" type="text" placeholder="Phone (required)" value="<?php echo isset($_POST['contact']['phone']) ? $_POST['contact']['phone'] : ''?>" required="required" id="contact-form-phone" />
-								<input name="contact[genre]" type="text" placeholder="Genre (required)" value="<?php echo isset($_POST['contact']['genre']) ? $_POST['contact']['genre'] : ''?>" required="required" id="contact-form-genre" />
-
-								<textarea name="contact[message]"  placeholder="Your Message (required)"id="contact-form-message" required="required"><?php echo isset($_POST['contact']['message']) ? $_POST['contact']['message'] : ''?></textarea>
-								<input type="submit" class="submit" value="<?php _e('Submit', 'aletheme')?>"/>
+					<form method="post" action="<?php the_permalink();?>">
+							<?php if (isset($_GET['success'])) : ?>
+									<p class="success"><?php _e('Thank you for your message!', 'igl')?></p>
+							<?php endif; ?>
+							<?php if (isset($error) && isset($error['msg'])) : ?>
+									<p class="error"><?php echo $error['msg']?></p>
+							<?php endif; ?>
+						<div class="contact-form__row">
+							<div class="contact-form__column">
+								<input name="contact[name]" type="text" placeholder="Your Name" value="<?php echo isset($_POST['contact']['name']) ? $_POST['contact']['name'] : ''?>" required="required" id="contact-form-name" />
+							</div>
+							<div class="contact-form__column">
+								<input name="contact[phone]" type="text" placeholder="Your Phone" value="<?php echo isset($_POST['contact']['phone']) ? $_POST['contact']['phone'] : ''?>" required="required" id="contact-form-phone" />
+							</div>
+							<div class="contact-form__column">
+								<input name="contact[email]" type="email" placeholder="Your Email" value="<?php echo isset($_POST['contact']['email']) ? $_POST['contact']['email'] : ''?>" required="required" id="contact-form-email" />
+							</div>
 						</div>
-						<?php wp_nonce_field() ?>
-				</form>
+
+						<textarea name="contact[message]"  placeholder="Message..." id="contact-form-message" required="required"><?php echo isset($_POST['contact']['message']) ? $_POST['contact']['message'] : ''?></textarea>
+
+							<input type="submit" class="submit button button--large" value="<?php _e('Send message', 'igl')?>"/>
+							<?php wp_nonce_field() ?>
+					</form>
+
+				</div>
+
 
 			</div>
+
+			<?php if ( ale_get_meta('address') ): ?>
+
+				<div class="contact-map">
+					<?php echo do_shortcode( '[ale_map address="' . ale_get_meta('address') .'" width="100%" height="470px"]' ); ?>
+				</div>
+
+			<?php endif; ?>
 		</div>
 
 <?php get_footer(); ?>
