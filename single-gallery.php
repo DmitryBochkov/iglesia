@@ -1,50 +1,71 @@
 <?php get_header(); ?>
 
     <!-- Content -->
-    <div class="portfolio-single-center-align">
-    <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-    <div class="portfolio-single-title">
-        <h2><?php the_title(); ?></h2>
-        <p><?php _e('by','aletheme'); ?> <a href=""><?php echo the_author_posts_link(); ?></a> <?php _e('on','aletheme'); ?> <?php echo get_the_date(); ?></p>
-        <a href="<?php echo home_url();?>/gallery" class="back"><?php _e('&lt; back to the gallery','aletheme'); ?></a>
-    </div>
+    <!-- Content -->
+    <div class="container">
+      <div class="wrapper">
+        <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-    <section class="slider">
+        <h2 class="page-title"><?php the_title(); ?></h2>
 
-    <div id="slider" class="flexslider portfolioslider">
-    <ul class="slides">
-        <?php $args = array(
-            'post_type' => 'attachment',
-            'numberposts' => -1,
-            'post_status' => null,
-            'order'				=> 'ASC',
-            'orderby'			=> 'menu_order ID',
-            'meta_query'		=> array(
+        <section class="gallery">
+
+          <div class="gallerydescriptionbox">
+            <?php the_content(); ?>
+          </div>
+
+
+            <?php $args = array(
+              'post_type' => 'attachment',
+              'numberposts' => -1,
+              'post_status' => null,
+              'order'				=> 'ASC',
+              'orderby'			=> 'menu_order ID',
+              'meta_query'		=> array(
                 array(
-                    'key'		=> '_ale_hide_from_gallery',
-                    'value'		=> 0,
-                    'type'		=> 'DECIMAL',
+                  'key'		=> '_ale_hide_from_gallery',
+                  'value'		=> 0,
+                  'type'		=> 'DECIMAL',
                 ),
-            ),
-            'post_parent' => $post->ID
-        );
-        $attachments = get_posts( $args );
-        if ( $attachments ) {
-            foreach ( $attachments as $attachment ) { ?>
-                <li>
-                    <?php echo wp_get_attachment_image( $attachment->ID, 'gallery-big' ); ?>
-                </li>
-            <?php }
-        } ?>
-    </ul>
-    </div>
+              ),
+              'post_parent' => $post->ID
+            );
+            $attachments = get_posts( $args );?>
+            <?php if ( $attachments ): ?>
+              <ul class="gallery__items cf">
+                <?php $count = 0; ?>
+                <?php foreach ( $attachments as $attachment ): ?>
+                  <?php setup_postdata($attachment); ?>
+                  <li class="gallery__item">
+                    <a class="gallery__link" href="<?php echo wp_get_attachment_image_url($attachment->ID, 'full'); ?>">
+                    <?php if ( $count == 2 ): ?>
+                      <?php echo wp_get_attachment_image( $attachment->ID, 'gallery-rect' ); ?>
+                    <?php elseif ( $count == 7 ): ?>
+                      <?php echo wp_get_attachment_image( $attachment->ID, 'gallery-big' ); ?>
+                    <?php else: ?>
+                      <?php echo wp_get_attachment_image( $attachment->ID, 'gallery-square' ); ?>
+                    <?php endif; ?>
 
 
+                    <div class="overlay">
+                      <div class="overlay__arrow">
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                      </div>
+                    </div>
 
-    <div class="gallerydescriptionbox">
-        <?php the_content(); ?>
-    </div>
-    </section>
-    <?php endwhile;  endif;  ?>
+                    </a>
+                  </li>
+                  <?php $count += 1; ?>
+                <?php endforeach; wp_reset_postdata(); ?>
+              </ul>
+
+            <?php endif; ?>
+
+        </section>
+      <?php endwhile;  endif;  ?>
+
+
+      </div>
+
     </div>
 <?php get_footer(); ?>
